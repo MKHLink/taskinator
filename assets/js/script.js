@@ -74,6 +74,7 @@ function createTaskEl(taskDataObj)
     taskDataObj.id = taskIdCounter;
     tasks.push(taskDataObj);
 
+    saveTasks();
     taskIdCounter++;
 }
 
@@ -149,6 +150,7 @@ function deletTask(taskId)
         }
     }
     tasks = updatedTaskArr;
+    saveTasks();
 }
 
 function editTask(taskId)
@@ -181,6 +183,7 @@ function completeEditTask(taskName, taskType,taskId)
         }
     }
 
+    saveTasks();
     alert("Task Updated");
 
     formEl.removeAttribute("data-task-id");
@@ -217,4 +220,11 @@ function tasksStausChangeHandler(event)
           tasks[i].status = statusValue;
         }
     }
+
+    saveTasks();
+}
+
+function saveTasks()
+{
+    localStorage.setItem("Tasks",JSON.stringify(tasks));
 }
