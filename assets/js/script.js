@@ -243,7 +243,6 @@ function loadTasks()
 
   for (var i = 0; i < savedTasks.length; i++) 
   {
-    console.log(savedTasks[i]);
     createTaskEl(savedTasks[i]);
   }
     
