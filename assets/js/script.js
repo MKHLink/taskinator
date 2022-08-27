@@ -7,6 +7,7 @@ var pageContentEl = document.querySelector("#page-content");
 
 var tasks=[];
 
+loadTasks();
 pageContentEl.addEventListener("click",taskButtonHandler);
 
 formEl.addEventListener("submit",taskFormHandler);
@@ -183,11 +184,11 @@ function completeEditTask(taskName, taskType,taskId)
         }
     }
 
-    saveTasks();
     alert("Task Updated");
 
     formEl.removeAttribute("data-task-id");
     document.querySelector("#save-task").textContent = "Add Task";
+    saveTasks();
 }
 
 pageContentEl.addEventListener("change",tasksStausChangeHandler);
@@ -226,5 +227,24 @@ function tasksStausChangeHandler(event)
 
 function saveTasks()
 {
-    localStorage.setItem("Tasks",JSON.stringify(tasks));
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+}
+
+function loadTasks()
+{
+    var savedTasks = localStorage.getItem("tasks");
+
+    if (!savedTasks) {
+      return false;
+    }
+  
+    savedTasks = JSON.parse(savedTasks);
+  
+
+  for (var i = 0; i < savedTasks.length; i++) 
+  {
+    console.log(savedTasks[i]);
+    createTaskEl(savedTasks[i]);
+  }
+    
 }
